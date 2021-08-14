@@ -8,7 +8,7 @@ import {
 
 @Entity()
 export class Member {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn()
   member_no: bigint;
 
   @Column({ unique: true })
