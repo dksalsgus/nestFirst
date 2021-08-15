@@ -1,11 +1,6 @@
 import { IsEmail, IsString } from 'class-validator';
 
-export class CreateMemberDto {
-  member_no: bigint;
-
-  @IsString()
-  member_id: string;
-
+export class UpdateMemberDto {
   @IsString()
   member_pw: string;
 
