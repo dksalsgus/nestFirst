@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MemberModule } from './member/member.module';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { MemberModule } from './member/member.module';
       database: process.env.DATABASE_NAME,
     }),
     MemberModule,
+    TodoModule,
   ],
   controllers: [],
   providers: [],
