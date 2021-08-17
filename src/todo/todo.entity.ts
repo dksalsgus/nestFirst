@@ -1,7 +1,9 @@
+import { Member } from 'src/member/member.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -9,7 +11,7 @@ import {
 @Entity()
 export class Todo {
   @PrimaryGeneratedColumn()
-  todo_no: bigint;
+  todo_no: number;
 
   @Column({ nullable: false, length: 20 })
   todo_kind: string;
@@ -25,4 +27,7 @@ export class Todo {
 
   @UpdateDateColumn()
   update_at: Date;
+
+  @ManyToOne((_type) => Member, (member) => member.member_no)
+  member: Member;
 }
