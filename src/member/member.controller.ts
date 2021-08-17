@@ -14,25 +14,25 @@ import { CreateMemberDto } from './dto/create-member.dto';
 import { LoginMemberDto } from './dto/login-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
 
-@Controller()
+@Controller('member')
 export class MemberController {
   constructor(private memberService: MemberService) {}
 
-  @Get('members')
+  @Get('list')
   getMembers(): Promise<Member[]> {
     const members = this.memberService.getMembers();
     return members;
   }
 
-  @Post('member')
+  @Post()
   createMember(@Body() createMemberDto: CreateMemberDto): Promise<Member> {
     const member = this.memberService.createMember(createMemberDto);
     return member;
   }
 
-  @Get('member/:member_id')
-  findById(@Param('member_id') member_id: string): Promise<Member> {
-    const findMember = this.memberService.findByMemberId(member_id);
+  @Get(':member_no')
+  findById(@Param('member_no') member_no: bigint): Promise<Member> {
+    const findMember = this.memberService.findByMemberNo(member_no);
     return findMember;
   }
 
@@ -42,17 +42,17 @@ export class MemberController {
     return member;
   }
 
-  @Patch('member/:member_id')
+  @Patch(':member_no')
   updateMember(
-    @Param('member_id') member_id: string,
+    @Param('member_no') member_no: bigint,
     @Body() updateMemberDto: UpdateMemberDto,
   ): Promise<Member> {
-    const member = this.memberService.updateMember(member_id, updateMemberDto);
+    const member = this.memberService.updateMember(member_no, updateMemberDto);
     return member;
   }
 
-  @Delete('member/:member_id')
-  deleteMember(@Param('member_id') member_id: string): Promise<void> {
-    return this.memberService.deleteMember(member_id);
+  @Delete(':member_no')
+  deleteMember(@Param('member_no') member_no: bigint): Promise<void> {
+    return this.memberService.deleteMember(member_no);
   }
 }

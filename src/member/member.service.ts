@@ -39,16 +39,18 @@ export class MemberService {
     return saveMember;
   }
 
-  async findByMemberId(member_id: string): Promise<Member> {
-    const findMember = this.memberRepository.findOne({ member_id });
+  async findByMemberNo(member_no: bigint): Promise<Member> {
+    const findMember = this.memberRepository.findOne({ member_no });
     if (!findMember) {
-      throw new NotFoundException(`Not found ${member_id}`);
+      throw new NotFoundException(`Not found ${member_no}`);
     }
     return findMember;
   }
 
   async loginMember(loginMemberDto: LoginMemberDto): Promise<Member> {
-    const member = await this.findByMemberId(loginMemberDto.member_id);
+    const member = await this.memberRepository.findOne(
+      loginMemberDto.member_id,
+    );
     if (!member) {
       throw new NotFoundException(`Not found ${loginMemberDto.member_id}`);
     }
@@ -59,12 +61,12 @@ export class MemberService {
   }
 
   async updateMember(
-    member_id: string,
+    member_no: bigint,
     updateMemberDto: UpdateMemberDto,
   ): Promise<Member> {
-    const member = await this.findByMemberId(member_id);
+    const member = await this.findByMemberNo(member_no);
     if (!member) {
-      throw new NotFoundException(`Not found ${member_id}`);
+      throw new NotFoundException(`Not found ${member_no}`);
     }
 
     member.member_name = updateMemberDto.member_name;
@@ -76,10 +78,10 @@ export class MemberService {
     return updateMember;
   }
 
-  async deleteMember(member_id: string): Promise<void> {
-    const ret = await this.memberRepository.delete({ member_id });
+  async deleteMember(member_no: bigint): Promise<void> {
+    const ret = await this.memberRepository.delete({ member_no });
     if (ret.affected === 0) {
-      throw new NotFoundException(`Not Found ${member_id}`);
+      throw new NotFoundException(`Not Found ${member_no}`);
     }
   }
 }
