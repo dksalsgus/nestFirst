@@ -28,6 +28,9 @@ export class Todo {
   @UpdateDateColumn()
   update_at: Date;
 
-  @ManyToOne((_type) => Member, (member) => member.member_no)
+  @ManyToOne((_type) => Member, (member) => member.member_no, {
+    eager: false,
+    lazy: true,
+  })
   member: Member;
 }

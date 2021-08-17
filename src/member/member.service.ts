@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Member } from './member.entity';
-import { MemberRepository } from './nenber.repository';
+import { MemberRepository } from './member.repository';
 import { CreateMemberDto } from './dto/create-member.dto';
 import * as bcrypt from 'bcrypt';
 import { LoginMemberDto } from './dto/login-member.dto';
