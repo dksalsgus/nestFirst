@@ -6,7 +6,7 @@ import { CreateTodoDto } from './dto/create-todo.dto';
 import { MemberRepository } from '../member/member.repository';
 import { MemberService } from '../member/member.service';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { Transaction } from 'typeorm';
+import { getManager, Transaction } from 'typeorm';
 
 @Injectable()
 export class TodoService {
@@ -55,6 +55,9 @@ export class TodoService {
     todo_no: number,
     updateTodoDto: UpdateTodoDto,
   ): Promise<Todo> {
+    // await getManager().transaction(async (transactionentityManager) => {
+    //   await transactionentityManager.save(findTodo);
+    // });
     const findTodo = await this.findByTodoNo(todo_no);
     if (!findTodo) {
       throw new NotFoundException(`Not Found todo_no =${todo_no}`);
