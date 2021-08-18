@@ -30,7 +30,7 @@ export class Todo {
 
   @ManyToOne((_type) => Member, (member) => member.member_no, {
     eager: false,
-    lazy: true,
+    lazy: false,
   })
   member: Member;
 }
