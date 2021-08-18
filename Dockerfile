@@ -10,6 +10,6 @@ COPY . .
 # HOST
 ENV HOST 0.0.0.0
 # PORT
-EXPOSE 9999
+EXPOSE 8888
 # 실행 커맨드
 CMD ["yarn", "start:dev"]
