@@ -39,7 +39,7 @@ export class MemberService {
     return saveMember;
   }
 
-  async findByMemberNo(member_no: bigint): Promise<Member> {
+  async findByMemberNo(member_no: number): Promise<Member> {
     const findMember = this.memberRepository.findOne({ member_no });
     if (!findMember) {
       throw new NotFoundException(`Not found ${member_no}`);
@@ -61,7 +61,7 @@ export class MemberService {
   }
 
   async updateMember(
-    member_no: bigint,
+    member_no: number,
     updateMemberDto: UpdateMemberDto,
   ): Promise<Member> {
     const member = await this.findByMemberNo(member_no);
@@ -78,7 +78,7 @@ export class MemberService {
     return updateMember;
   }
 
-  async deleteMember(member_no: bigint): Promise<void> {
+  async deleteMember(member_no: number): Promise<void> {
     const ret = await this.memberRepository.delete({ member_no });
     if (ret.affected === 0) {
       throw new NotFoundException(`Not Found ${member_no}`);

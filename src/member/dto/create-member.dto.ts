@@ -1,7 +1,7 @@
 import { IsEmail, IsString } from 'class-validator';
 
 export class CreateMemberDto {
-  member_no: bigint;
+  member_no: number;
 
   @IsString()
   member_id: string;

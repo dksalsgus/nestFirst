@@ -31,7 +31,7 @@ export class MemberController {
   }
 
   @Get(':member_no')
-  findById(@Param('member_no') member_no: bigint): Promise<Member> {
+  findById(@Param('member_no') member_no: number): Promise<Member> {
     const findMember = this.memberService.findByMemberNo(member_no);
     return findMember;
   }
@@ -44,7 +44,7 @@ export class MemberController {
 
   @Patch(':member_no')
   updateMember(
-    @Param('member_no') member_no: bigint,
+    @Param('member_no') member_no: number,
     @Body() updateMemberDto: UpdateMemberDto,
   ): Promise<Member> {
     const member = this.memberService.updateMember(member_no, updateMemberDto);
@@ -52,7 +52,7 @@ export class MemberController {
   }
 
   @Delete(':member_no')
-  deleteMember(@Param('member_no') member_no: bigint): Promise<void> {
+  deleteMember(@Param('member_no') member_no: number): Promise<void> {
     return this.memberService.deleteMember(member_no);
   }
 }

@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MemberModule } from './member/member.module';
 import { TodoModule } from './todo/todo.module';
+import { PorfileModule } from './porfile/profile.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -19,8 +21,10 @@ import { TodoModule } from './todo/todo.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
     }),
+    MulterModule.register({ dest: '../upload' }),
     MemberModule,
     TodoModule,
+    PorfileModule,
   ],
   controllers: [],
   providers: [],

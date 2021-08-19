@@ -22,14 +22,14 @@ export class TodoController {
 
   @Post(':member_no')
   createTodo(
-    @Param('member_no') member_no: bigint,
+    @Param('member_no') member_no: number,
     @Body() createTodoDto: CreateTodoDto,
   ): Promise<Todo> {
     return this.todoService.createTodo(member_no, createTodoDto);
   }
 
   @Get('list/:member_no')
-  listTodo(@Param('member_no') member_no: bigint): Promise<Todo[]> {
+  listTodo(@Param('member_no') member_no: number): Promise<Todo[]> {
     const todos = this.todoService.getTodos(member_no);
     return todos;
   }

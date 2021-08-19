@@ -17,7 +17,7 @@ export class TodoService {
   ) {}
 
   async createTodo(
-    member_no: bigint,
+    member_no: number,
     createTodoDto: CreateTodoDto,
   ): Promise<Todo> {
     const member = await this.memberService.findByMemberNo(member_no);
@@ -30,7 +30,7 @@ export class TodoService {
     return saveTodo;
   }
 
-  async getTodos(member_no: bigint): Promise<Todo[]> {
+  async getTodos(member_no: number): Promise<Todo[]> {
     const member = await this.memberService.findByMemberNo(member_no);
     if (!member) {
       throw new NotFoundException(`Not Found member_no = ${member_no}`);

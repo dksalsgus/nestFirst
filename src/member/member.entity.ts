@@ -1,7 +1,9 @@
+import { Profile } from '../porfile/profile.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -9,7 +11,7 @@ import {
 @Entity()
 export class Member {
   @PrimaryGeneratedColumn()
-  member_no: bigint;
+  member_no: number;
 
   @Column({ unique: true })
   member_id: string;
@@ -31,4 +33,7 @@ export class Member {
 
   @UpdateDateColumn()
   update_at: Date;
+
+  @OneToOne((_type) => Profile, (profile) => profile.profile_no)
+  profile: Profile;
 }
