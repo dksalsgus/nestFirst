@@ -16,17 +16,15 @@ export class PorfileService {
     file: Express.Multer.File,
     profile_nickname: string,
   ): Promise<Profile> {
-    const { member_no } = await await this.memberService.findByMemberNo(8);
+    const member = await await this.memberService.findByMemberNo(8);
     const newProfile = await this.profileRepository.create({
-      profile_no: Number(member_no),
       profile_nickname: profile_nickname,
       profile_picture: file.originalname,
+      member: member,
     });
-    console.log(newProfile);
     if (!newProfile) {
       throw new BadRequestException();
     }
-    console.log('test');
     const saveProfile = await this.profileRepository.save(newProfile);
     return saveProfile;
   }
