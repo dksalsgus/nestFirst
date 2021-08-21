@@ -7,11 +7,8 @@ import {
 } from '@nestjs/common';
 import { PorfileService } from './profile.service';
 import { Profile } from './profile.entity';
-import { CreateProfileDto } from './dto/create-profile.dto';
-import {
-  FileFieldsInterceptor,
-  FileInterceptor,
-} from '@nestjs/platform-express';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Controller('profile')
 export class ProfileController {
@@ -23,7 +20,6 @@ export class ProfileController {
     @UploadedFile() file: Express.Multer.File,
     @Body('profile_nickname') profile_nickname: string,
   ): Promise<Profile> {
-    console.log(file);
     const profile = this.porfileService.createProfile(file, profile_nickname);
     return profile;
   }
