@@ -5,8 +5,7 @@ import { MemberModule } from './member/member.module';
 import { TodoModule } from './todo/todo.module';
 import { PorfileModule } from './porfile/profile.module';
 import { MulterModule } from '@nestjs/platform-express';
-import path from 'path';
-import multer, { diskStorage } from 'multer';
+import * as multer from 'multer';
 
 @Module({
   imports: [
@@ -23,16 +22,7 @@ import multer, { diskStorage } from 'multer';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
     }),
-    MulterModule.registerAsync({
-      useFactory: () => ({
-        storage: diskStorage({
-          destination: '../upload',
-          filename: function (req, file, callback) {
-            callback(null, file.originalname);
-          },
-        }),
-      }),
-    }),
+
     MemberModule,
     TodoModule,
     PorfileModule,
