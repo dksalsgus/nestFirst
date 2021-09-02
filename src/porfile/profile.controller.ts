@@ -8,7 +8,6 @@ import {
 import { PorfileService } from './profile.service';
 import { Profile } from './profile.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
 
 @Controller('profile')
 export class ProfileController {
