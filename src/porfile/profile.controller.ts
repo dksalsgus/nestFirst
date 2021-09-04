@@ -1,6 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
+  Get,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -21,5 +24,15 @@ export class ProfileController {
   ): Promise<Profile> {
     const profile = this.porfileService.createProfile(file, profile_nickname);
     return profile;
+  }
+
+  @Delete(':profile_no')
+  deleteProfile(@Param('profile_no') profile_no: number): Promise<void> {
+    return this.porfileService.deleteProfile(profile_no);
+  }
+
+  @Get(':profile_no')
+  detailProfile(@Param('profile_no') profile_no: number): Promise<Profile> {
+    return this.porfileService.detailProfile(profile_no);
   }
 }

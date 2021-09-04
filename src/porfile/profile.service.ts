@@ -1,8 +1,13 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProfileRepository } from './profile.repository';
 import { Profile } from './profile.entity';
 import { MemberService } from '../member/member.service';
+import { unlink } from 'fs';
 
 @Injectable()
 export class PorfileService {
@@ -27,5 +32,24 @@ export class PorfileService {
     }
     const saveProfile = await this.profileRepository.save(newProfile);
     return saveProfile;
+  }
+
+  async deleteProfile(profile_no: number): Promise<void> {
+    const findProfile = await this.profileRepository.findOne(profile_no);
+    if (!findProfile) {
+      throw new NotFoundException(`Not Fouond Profile No ${profile_no}`);
+    }
+    unlink('./uploadFile/' + findProfile.profile_picture, function (err) {
+      console.log(err);
+    });
+    const del = await this.profileRepository.delete(profile_no);
+  }
+
+  async detailProfile(profile_no: number): Promise<Profile> {
+    const findProfile = await this.profileRepository.findOne(profile_no);
+    if (!findProfile) {
+      throw new NotFoundException(`Not Found Profile No ${profile_no}`);
+    }
+    return findProfile;
   }
 }
