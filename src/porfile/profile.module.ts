@@ -6,8 +6,6 @@ import { ProfileRepository } from './profile.repository';
 import { MemberModule } from '../member/member.module';
 import { MulterModule } from '@nestjs/platform-express';
 import * as multer from 'multer';
-import path from 'path';
-import { strictEqual } from 'assert';
 
 @Module({
   imports: [
@@ -17,7 +15,7 @@ import { strictEqual } from 'assert';
       useFactory: () => ({
         storage: multer.diskStorage({
           destination(req, file, cb) {
-            cb(null, '../uploadTest');
+            cb(null, './uploadFile');
           },
           filename(req, file, cb) {
             cb(null, file.originalname);
