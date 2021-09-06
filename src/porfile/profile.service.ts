@@ -52,4 +52,25 @@ export class PorfileService {
     }
     return findProfile;
   }
+
+  async updateProfile(
+    profile_no: number,
+    profile_nickname: string,
+    file: Express.Multer.File,
+  ): Promise<Profile> {
+    const findProfile = await this.profileRepository.findOne(profile_no);
+    if (!findProfile) {
+      throw new NotFoundException(`Not Found Profile No ${profile_no}`);
+    }
+
+    unlink('./uploadFile/' + findProfile.profile_picture, function (err) {
+      console.log(err);
+    });
+
+    findProfile.profile_nickname = profile_nickname;
+    findProfile.profile_picture = file.originalname;
+
+    const updateProfile = this.profileRepository.save(findProfile);
+    return updateProfile;
+  }
 }
