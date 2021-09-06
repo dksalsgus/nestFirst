@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -34,5 +35,20 @@ export class ProfileController {
   @Get(':profile_no')
   detailProfile(@Param('profile_no') profile_no: number): Promise<Profile> {
     return this.porfileService.detailProfile(profile_no);
+  }
+
+  @Patch(':profile_no')
+  @UseInterceptors(FileInterceptor('profile_picture'))
+  updateProfile(
+    @Param('profile_no') profile_no: number,
+    @UploadedFile() file: Express.Multer.File,
+    @Body('profile_nickname') profile_nickname: string,
+  ): Promise<Profile> {
+    const updateProfile = this.porfileService.updateProfile(
+      profile_no,
+      profile_nickname,
+      file,
+    );
+    return updateProfile;
   }
 }
