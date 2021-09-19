@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Put,
+  Render,
 } from '@nestjs/common';
 import { Member } from './member.entity';
 import { MemberService } from './member.service';
@@ -18,6 +19,7 @@ import { UpdateMemberDto } from './dto/update-member.dto';
 export class MemberController {
   constructor(private memberService: MemberService) {}
 
+  @Render('index')
   @Get('list')
   getMembers(): Promise<Member[]> {
     const members = this.memberService.getMembers();

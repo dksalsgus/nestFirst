@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Render,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
@@ -28,6 +29,7 @@ export class TodoController {
     return this.todoService.createTodo(member_no, createTodoDto);
   }
 
+  @Render('index')
   @Get('list/:member_no')
   listTodo(@Param('member_no') member_no: number): Promise<Todo[]> {
     const todos = this.todoService.getTodos(member_no);
