@@ -4,8 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MemberModule } from './member/member.module';
 import { TodoModule } from './todo/todo.module';
 import { PorfileModule } from './porfile/profile.module';
-import { MulterModule } from '@nestjs/platform-express';
-import * as multer from 'multer';
+import { HomeController } from './home/home.controller';
+import { HomeModule } from './home/home.module';
 
 @Module({
   imports: [
@@ -26,8 +26,9 @@ import * as multer from 'multer';
     MemberModule,
     TodoModule,
     PorfileModule,
+    HomeModule,
   ],
-  controllers: [],
+  controllers: [HomeController],
   providers: [],
 })
 export class AppModule {}

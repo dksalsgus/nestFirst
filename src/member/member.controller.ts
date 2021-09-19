@@ -6,7 +6,6 @@ import {
   Param,
   Patch,
   Post,
-  Put,
   Render,
 } from '@nestjs/common';
 import { Member } from './member.entity';
